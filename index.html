@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'arial', sans-serif;
+            color: whitesmoke;
+        }
+        .three-dots i{
+            color: whitesmoke;
+        }
+
+        section {
+            background-color: rgb(14 14 14 / 98%);
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        section header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+
+        section header ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section header ul li {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        section header ul li a {
+            color: #111;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        section header ul li button {
+            background: #1a73e8;
+            border: none;
+            outline: none;
+            padding: 10px 24px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        section .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        section .main .searchBox {
+            position: relative;
+            width: 50rem;
+            margin-top: 20px;
+        }
+
+        section .main .searchBox .search {
+            width: 100%;
+            padding: 15px;
+            padding-left: 45px;
+            padding-right: 60px;
+            border-radius: 30px;
+            border: 1px solid #dedede;
+            outline: none;
+            font-size: 16px;
+        }
+
+        section .main .searchBox .icons {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            padding: 11px 20px;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        section .main .searchBox .icons .miclens {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        section .main .buttons {
+            margin-top: 20px;
+        }
+
+        section .main .buttons button {
+            margin: 0 5px;
+            padding: 12px 20px;
+            color: #3c4043;
+            background: #f8f9fa;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            outline: none;
+        }
+
+        section .main .buttons button:hover {
+            border: 1px solid #dedede;
+        }
+
+        #errorClockModal .container {
+            transform: translateY(25%);}
+        .container {
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .container:hover {
+            background-color: rgba(174, 173, 173, 0.1);
+            /* خلفية شفافة عند التمرير */
+        }
+
+        .icon {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            /* عرض الأيقونة */
+            height: 50px;
+            /* ارتفاع الأيقونة */
+            border-radius: 50%;
+            /* دائرة */
+            background-color: #f1f3f4;
+            color: white;
+            /* لون الأيقونة */
+            font-size: 24px;
+            /* حجم الأيقونة */
+            margin: 0 auto;
+            /* توسيط الأيقونة */
+        }
+
+        i {
+            color: #202124;
+            font-size: medium;
+        }
+
+        .text {
+            text-align: center;
+            margin-top: 10px;
+            /* مسافة بين الأيقونة والنص */
+            font-size: 16px;
+            /* حجم النص */
+        }
+
+        .form-container {
+
+            width: 35%;
+            position: absolute;
+            display: none;
+            /* margin-top: 20px; */
+            background-color: #1d1c1c;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .form-container h3 {
+            text-align: center;
+        }
+
+        .form-group {
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            transition: 0.2s;
+            color: #999;
+            font-size: 16px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus+label,
+        .form-group input:not(:placeholder-shown)+label {
+            top: -10px;
+            left: 10px;
+            font-size: 12px;
+            color: #007bff;
+        }
+
+        .form-container button {
+            width: 48%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button.done {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .form-container button.cancel {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        /* section .main .languages {
+            display: flex;
+            margin-top: 30px;
+        }
+        
+        section .main .languages li {
+            list-style: none;
+            margin: 0 5px;
+            font-size: 13px;
+        } */
+
+        /* section .main .languages li a {
+            text-decoration: none;
+            color: #d8d6ef;
+        } */
+
+
+        section .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #f2f2f2;
+        }
+
+        section .footer .row {
+            padding: 15px 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            color: #5f6368;
+        }
+
+        section .footer .row.row2 {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        section .footer .row.row2 ul {
+            display: flex;
+        }
+
+        section .footer .row.row2 ul li {
+            list-style: none;
+        }
+
+        section .footer .row.row2 ul li a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #5f6368;
+            margin-right: 25px;
+        }
+
+
+        .form {
+            width: 400px;
+
+
+        }
+
+        .form__title {
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+        }
+
+        .form__div {
+            position: relative;
+            height: 52px;
+            margin-bottom: 1.5rem;
+        }
+
+        .form__input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-size: var(--normal-font-size);
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            outline: none;
+            padding: 1rem;
+            background: none;
+            z-index: 1;
+        }
+
+        .form__label {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            padding: 0 0.25rem;
+            background-color: #1d1c1c;
+            color: var(--input-color);
+            font-size: var(--normal-font-size);
+            transition: 0.3s;
+        }
+
+        .form__button {
+            color: black;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            min-width: 5.14em;
+            height: var(--cr-button-height);
+            padding: 8px 16px;
+            outline-width: 0px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            border: 1px solid whitesmoke;
+            border-radius: 100px;
+            font-weight: 500;
+            line-height: 20px;
+            isolation: isolate;
+
+        }
+
+        .form__button:hover {
+            box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
+            border: #1A73E8 1px solid;
+        }
+
+        /*Input focus move up label*/
+        .form__input:focus+.form__label {
+            top: -0.5rem;
+            left: 0.8rem;
+            color: var(--first-color);
+            font-size: var(--small-font-size);
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        /*Input focus sticky top label*/
+        .form__input:not(:placeholder-shown).form__input:not(:focus)+.form__label {
+            top: -0.5rem;
+            left: 0.8rem;
+            z-index: 10;
+            font-size: var(--small-font-size);
+            font-weight: 500;
+        }
+
+        /*Input focus*/
+        .form__input:focus {
+            border: 2px solid var(--first-color);
+        }
+
+        /*===== GOOGLE FONTS =====*/
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+        /*===== VARIABLES CSS =====*/
+
+        :root {
+            /*===== Colores =====*/
+            --first-color: #1A73E8;
+            --input-color: #80868B;
+            --border-color: #DADCE0;
+
+            /*===== Fuente y tipografia =====*/
+            --body-font: 'Roboto', sans-serif;
+            --normal-font-size: 1rem;
+            --small-font-size: .75rem;
+        }
+
+        /*===== BASE =====*/
+        *,
+        ::before,
+        ::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        /*===== FORM =====*/
+        .l-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form {
+
+
+            &__title {
+                font-weight: 500;
+                margin-bottom: 2.5rem;
+            }
+
+            &__div {
+                position: relative;
+                height: 52px;
+                margin-bottom: 1.5rem;
+            }
+
+            &__input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                font-size: var(--normal-font-size);
+                border: 2px solid var(--border-color);
+                border-radius: .5rem;
+                outline: none;
+                padding: 1rem;
+                background: none;
+                z-index: 1;
+            }
+
+            &__label {
+                position: absolute;
+                left: 1rem;
+                top: 1rem;
+                padding: 0 .25rem;
+                background-color: #fff;
+                color: var(--input-color);
+                font-size: var(--normal-font-size);
+                transition: .3s;
+            }
+
+            &__button {
+                display: block;
+                margin-left: auto;
+                padding: .75rem 2rem;
+                outline: none;
+                border: none;
+                background-color: var(--first-color);
+                color: #fff;
+                font-size: var(--normal-font-size);
+                border-radius: .25rem;
+                cursor: pointer;
+                transition: .3s;
+
+                &:hover {
+                    box-shadow: 0 10px 36px rgba(0, 0, 0, .15);
+                }
+            }
+        }
+
+        .btns {
+            display: flex;
+            align-items: center;
+        }
+
+        .btns input {
+            margin: 0 10px;
+        }
+
+        /*Input focus move up label*/
+        .form__input:focus+.form__label {
+            top: -.5rem;
+            left: .8rem;
+            color: var(--first-color);
+            font-size: var(--small-font-size);
+            font-weight: 500;
+            z-index: 10;
+        }
+
+        /*Input focus sticky top label*/
+        .form__input:not(:placeholder-shown).form__input:not(:focus)+.form__label {
+            top: -.5rem;
+            left: .8rem;
+            z-index: 10;
+            font-size: var(--small-font-size);
+            font-weight: 500;
+        }
+
+        /*Input focus*/
+        .form__input:focus {
+            border: 2px solid var(--first-color);
+        }
+
+        #editForm {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+
+        #editForm input {
+            color: #00000082;
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #editForm button {
+            background-color: #4CAF50;
+            /* اللون الأخضر */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        #editForm button:hover {
+            background-color: #45a049;
+            /* لون أغمق عند التمرير */
+        }
+
+        #editForm button:last-child {
+            background-color: #f44336;
+            /* اللون الأحمر للإلغاء */
+        }
+
+        #editForm button:last-child:hover {
+            background-color: #d32f2f;
+            /* لون أغمق عند التمرير */
+        }
+        #searchInput{
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <!-- <header>
+            <ul>
+                <li>
+                    <a href>Gmail</a>
+                </li>
+                <li>
+                    <a href>Images</a>
+                </li>
+                <li>
+                    <a href><img src="./images/menuIcon.png" alt></a>
+                </li>
+                <li>
+                    <button>Sign In</button>
+                </li>
+            </ul>
+        </header> -->
+
+        <div class="main">
+            <div style="display:flex;justify-content: center;">
+
+            <div style="display:flex;justify-content: center;">
+                <img src="./images/google.png" alt>
+
+            </div>
+
+            </div>
+            <div style="display:flex;justify-content: center;">
+
+            <div class="searchBox">
+                <input type="text" id="searchInput" class="search" placeholder="ابحث في جوجل...">
+                <div class="icons">
+                    <div>
+                        <!-- نربط الضغط على أيقونة البحث مع عملية البحث -->
+                        <img src="./images/search.png" alt="search icon" id="searchIcon" style="cursor: pointer;">
+                    </div>
+                    <div class="miclens">
+                        <a href=""><img src="./images/mic.png" alt></a>
+                        <img src="./images/googlelens.png" alt>
+                    </div>
+                </div>
+            </div></div>
+            <script>
+                // البحث عند الضغط على أيقونة البحث
+                document.getElementById('searchIcon').addEventListener('click', function () {
+                    performSearch();
+                });
+
+                // البحث عند الضغط على Enter في حقل الإدخال
+                document.getElementById('searchInput').addEventListener('keypress', function (event) {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                        performSearch();
+                    }
+                });
+
+                // وظيفة تنفيذ البحث
+                function performSearch() {
+                    var query = document.getElementById('searchInput').value;
+                    if (query.trim() !== "") {
+                        var googleSearchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+                        window.location.href = googleSearchUrl; // الانتقال إلى صفحة بحث جوجل
+                    }
+                }
+            </script>
+
+
+            <style>
+                .shortcut {
+                    display: inline-block;
+                    padding: 20px;
+                    border-radius: 10px;
+                    position: relative;
+                    transition: background-color 0.3s;
+                    cursor: pointer;
+                }
+
+                .shortcut:hover {
+                    background-color: rgba(187, 185, 185, 0.1);
+                }
+
+                .shortcut img {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    background-color: #ebebeb;
+                }
+
+                .shortcut .text {
+                    margin-top: 10px;
+                    font-size: 16px;
+                }
+
+                .popup-menu {
+                    display: none;
+                    position: absolute;
+                    background-color: white;
+                    border: 1px solid #ccc;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                    z-index: 100;
+                }
+
+                .popup-menu div {
+                    padding: 10px;
+                    cursor: pointer;
+                }
+
+                .popup-menu div:hover {
+                    background-color: #f0f0f0;
+                }
+
+                #editForm {
+                    display: none;
+                    position: absolute;
+                    background-color: #1d1c1c;
+                    border: 1px solid #ccc;
+                    padding: 10px;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                    z-index: 200;
+
+                }
+            </style>
+
+            <div>
+
+                <div class="menu" style="display: flex;  margin-top: 20px;justify-content: center;">
+                    <div class="container" onclick="toggleForm()">
+                        <div class="icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="text">إضافة</div>
+                    </div>
+                   <a href="./note.html" >
+                    <div class="container">
+                        <div class="icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="text">ملاحظاتى</div>
+                    </div>
+                   </a>
+
+                    <div class="container" id="book" onclick="showError()">
+                        <div class="icon">
+                            <i class="fa-solid fa-cloud"></i>                        </div>
+                        <div class="text">الطقس</div>
+                    </div>
+                  
+
+
+                    <div id="errorModal" class="modal hidden">
+                        <div class="modal-content">
+                            <div class="error-icon">
+                                <i onclick="closeError()" class="fas fa-times" style="color:whitesmoke;font-size: 23px;
+                                ;position: absolute;
+                                font-weight: 900;
+                                right: 6%; top:6.5%; cursor: pointer;">
+                                </i> 
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="container" id="clock" onclick="showErrorClock()">
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="text">الساعة</div>
+                    </div>
+
+                    <!-- نافذة الخطأ -->
+                    <div id="errorClockModal" class="modal hidden">
+                        <div class="modal-content">
+                            <div class="error-icon">
+                                <i onclick="closeErrorClock()" class="fas fa-times" style=" color:whitesmoke;font-size: 23px;
+                                ;position: absolute;
+                                font-weight: 900;
+                                right: 6%; top:6.5%; cursor: pointer;"></i> 
+                            </div>
+
+                            <div class="container">
+                                <div class="time_wrapper">
+                                  <span class="text_color" id="time"></span>
+                                  <span class="text_color" id="sec"></span>
+                                  <span class="text_color" id="mid"></span>
+                                </div>
+                                <div class="day_wrapper">
+                                  <span class="text_color">SUN</span>
+                                  <span class="text_color">MON</span>
+                                  <span class="text_color">TUE</span>
+                                  <span class="text_color">WED</span>
+                                  <span class="text_color">THU</span>
+                                  <span class="text_color">FRI</span>
+                                  <span class="text_color">SAT</span>
+                                </div>
+                                <span class="text_color" id="showDate"></span>
+                              </div>
+
+                              <style>
+                                .text_color {
+                                    background-color: #00ff01;
+                                    -webkit-text-fill-color: transparent;
+                                    -webkit-background-clip: text;
+                                  }
+                                  .time_wrapper {
+                                    position: relative;
+                                  }
+                                  #time {
+                                    text-shadow: 0 0 40px #3bac2c;
+                                    font-size: 12rem;
+                                  }
+                                  #sec {
+                                    position: absolute;
+                                    bottom: 40px;
+                                    font-size: 2rem;
+                                  }
+                                  #mid {
+                                    position: absolute;
+                                    top: 35px;
+                                    right: -80px;
+                                    font-size: 3rem;
+                                  }
+                                  .day_wrapper {
+                                    display: flex;
+                                    position: relative;
+                                    left: 20px;
+                                    justify-content: space-between;
+                                  }
+                                  .day_wrapper span {
+                                    font-size: 2rem;
+                                    font-weight: 600;
+                                    opacity: 0.3;
+                                  }
+                                  #showDate {
+                                    position: relative;
+                                    left: 20px;
+                                    font-size: 2rem;
+                                  }
+
+                                  @media (max-width: 900px) {
+                                    section .main .searchBox {
+                                        position: relative;
+                                        width: 35rem;
+                                        margin-top: 20px;
+                                    }
+                                  }
+                                  @media (max-width: 600px) {
+                                    section .main .searchBox {
+                                        position: relative;
+                                        width: 25rem;
+                                        margin-top: 20px;
+                                    }
+                                  }
+                                  
+                              </style>
+                              <script>
+                                function currentTime() {
+                                    let date = new Date();
+                                    let hour = date.getHours();
+                                    let min = date.getMinutes();
+                                    let sec = date.getSeconds();
+                                    let mid = "AM";
+                                    mid = hour >= 12 ? "PM" : "AM";
+                                    hour = hour == 0 ? 12 : hour > 12 ? hour - 12 : hour;
+                                    hour = updateTime(hour);
+                                    min = updateTime(min);
+                                    sec = updateTime(sec);
+                                    document.querySelector("#time").innerHTML = `${hour}:${min}`;
+                                    document.querySelector("#sec").innerHTML = `${sec}`;
+                                    document.querySelector("#mid").innerHTML = `${mid}`;
+                                    let curr_date = date.getDate();
+                                    let day = date.getDay();
+                                    let month = date.getMonth();
+                                    let year = date.getFullYear();
+                                    let month_name = [
+                                      "January",
+                                      "February",
+                                      "March",
+                                      "April",
+                                      "May",
+                                      "June",
+                                      "July",
+                                      "August",
+                                      "September",
+                                      "October",
+                                      "November",
+                                      "December"
+                                    ];
+                                    let showDay = document.querySelectorAll(".day_wrapper span");
+                                    document.querySelector(
+                                      "#showDate"
+                                    ).innerHTML = `${month_name[month]} ${curr_date} ${year}`;
+                                    showDay[day].style.opacity = "1";
+                                  }
+                                  function updateTime(e) {
+                                    if (e < 10) return "0" + e;
+                                    else return e;
+                                  }
+                                  setInterval(currentTime, 1000);
+                                  
+                              </script>
+                        </div>
+
+                    </div>
+                    <script>
+                        function showErrorClock() {
+                            document.getElementById('errorClockModal').classList.remove('hidden');
+                        }
+
+                        function closeErrorClock() {
+                            document.getElementById('errorClockModal').classList.add('hidden');
+                        }
+
+                    </script>
+                </div>
+                <div style="display:flex;justify-content: center;">
+
+                <div id="shortcuts" style="display: flex;
+    flex-wrap: wrap;
+    width: 74%;
+    justify-content: center;"></div>
+                </div>
+
+            </div>
+            <style>
+                .modal {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 1000;
+                }
+
+                .modal-content {
+                    width: 90%;
+                    background-color: #161616;
+                    padding: 20px;
+                    border-radius: 5px;
+                    text-align: center;
+                    height: 90%;
+                }
+
+                .error-icon {
+                    font-size: 40px;
+                    color: red;
+                    margin-bottom: 10px;
+                }
+
+                .hidden {
+                    display: none;
+                }
+                .popup-menu div {
+                    color: black;
+                    padding: 10px;
+                    cursor: pointer;
+                    font-weight: 700;
+                }
+            </style>
+            <script>
+                function showError() {
+                    document.getElementById('errorModal').classList.remove('hidden');
+                }
+
+                function closeError() {
+                    document.getElementById('errorModal').classList.add('hidden');
+                }
+
+            </script>
+            <div class="form-container" id="formContainer">
+                <div class="l-form" style="position: relative;">
+                    <span class="error-icon" onclick="toggleForm()"
+                        style="cursor: pointer; color: red; font-size: 24px; position: absolute; top: -15px; right: -5px;">×</span>
+
+                    <form action="" class="form" onsubmit="addShortcut(event)">
+                        <h1 class="form__title" style="text-align: center;">Add Shortcut</h1>
+
+                        <div class="form__div">
+                            <input type="text" class="form__input" id="shortcutName" placeholder=" ">
+                            <label for="" class="form__label">Name</label>
+                        </div>
+
+                        <div class="form__div">
+                            <input type="text" class="form__input" id="shortcutURL" placeholder=" ">
+                            <label for="" class="form__label">URL</label>
+                        </div>
+                        <div class="btns">
+                            <input type="submit" class="form__button" value="Done">
+                            <input type="button" class="form__button cancel" value="Cancel" onclick="toggleForm()">
+                        </div>
+                    </form>
+                </div>
+            </div>
+           
+            <div id="editForm">
+                <input type="text" id="editName" placeholder="Edit Name">
+                <input type="text" id="editURL" placeholder="Edit URL">
+                <div style="display: flex; width:100%;">
+                    <button onclick="saveEdit()">حفظ</button>
+                    <button onclick="cancelEdit()">إلغاء</button>
+                </div>
+
+            </div>
+            <style>
+                .text {
+                    flex-grow: 1;
+                }
+
+                /* النقاط الثلاث مخفية افتراضيًا */
+                .three-dots {
+                    display: none;
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    cursor: pointer;
+                }
+
+                /* عند تمرير الفأرة على العنصر .shortcut، تظهر النقاط الثلاث */
+                .shortcut:hover .three-dots {
+                    display: block;
+                }
+
+                .popup-menu {
+                    display: none;
+                    position: absolute;
+                    top: 30px;
+                    right: 10px;
+                    background-color: #fff;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    padding: 10px;
+                    z-index: 1;
+                }
+            </style>
+
+
+            <div id="shortcuts"></div>
+
+            <script>
+                let shortcuts = JSON.parse(localStorage.getItem('shortcuts')) || [];
+
+                function renderShortcuts() {
+                    const shortcutList = document.getElementById('shortcuts');
+                    shortcutList.innerHTML = '';
+
+                    shortcuts.forEach((shortcut, index) => {
+                        const shortcutDiv = document.createElement('div');
+                        shortcutDiv.classList.add('shortcut');
+
+                        const icon = document.createElement('img');
+                        icon.src = `https://www.google.com/s2/favicons?sz=64&domain_url=${shortcut.url}`;
+                        icon.onclick = function () {
+                            window.open(shortcut.url, '_blank');
+                        };
+
+                        const text = document.createElement('div');
+                        text.classList.add('text');
+                        text.textContent = shortcut.name;
+
+                        const ellipsis = document.createElement('div');
+                        ellipsis.className = 'three-dots';
+                        ellipsis.innerHTML = '<i class="fas fa-ellipsis-v"></i>';
+                        ellipsis.onclick = function (event) {
+                            event.stopPropagation();
+                            togglePopupMenu(shortcutDiv);
+                        };
+
+                        const popupMenu = document.createElement('div');
+                        popupMenu.className = 'popup-menu';
+                        popupMenu.innerHTML = `
+                            <div onclick="editShortcut(${index}, '${shortcut.name}', '${shortcut.url}')">تعديل</div>
+                            <div onclick="deleteShortcut(${index})">حذف</div>
+                        `;
+
+                        shortcutDiv.appendChild(icon);
+                        shortcutDiv.appendChild(text);
+                        shortcutDiv.appendChild(ellipsis);
+                        shortcutDiv.appendChild(popupMenu);
+
+                        shortcutList.appendChild(shortcutDiv);
+                    });
+                }
+
+                function togglePopupMenu(shortcutDiv) {
+                    const popupMenu = shortcutDiv.querySelector('.popup-menu');
+                    popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
+                }
+
+                // استدعاء renderShortcuts عند تحميل الصفحة
+                window.onload = renderShortcuts;
+            </script>
+
+            <script>
+                let currentEditIndex = null;
+
+                // استرجاع الاختصارات المخزنة عند تحميل الصفحة
+                window.onload = function () {
+                    renderShortcuts();
+                };
+
+                function toggleForm() {
+                    const formContainer = document.getElementById('formContainer');
+                    formContainer.style.display = formContainer.style.display === 'none' || formContainer.style.display === '' ? 'block' : 'none';
+                }
+
+                function addShortcut(event) {
+                    event.preventDefault();
+
+                    const name = document.getElementById('shortcutName').value;
+                    const url = document.getElementById('shortcutURL').value;
+
+                    if (name && url) {
+                        const shortcutsContainer = document.getElementById('shortcuts');
+
+                        const shortcutDiv = document.createElement('div');
+                        shortcutDiv.classList.add('shortcut');
+
+                        const icon = document.createElement('img');
+                        icon.src = `https://www.google.com/s2/favicons?sz=64&domain_url=${url}`;
+                        icon.onclick = function () {
+                            window.open(url, '_blank');
+                        };
+
+                        const text = document.createElement('div');
+                        text.classList.add('text');
+                        text.textContent = name;
+
+                        const ellipsis = document.createElement('div');
+                        ellipsis.className = 'three-dots';
+                        ellipsis.innerHTML = '<i class="fas fa-ellipsis-v"></i>';
+                        ellipsis.style.position = 'absolute';
+                        ellipsis.style.top = '10px';
+                        ellipsis.style.right = '10px';
+                        ellipsis.onclick = function (event) {
+                            event.stopPropagation();
+                            togglePopupMenu(shortcutDiv);
+                        };
+
+                        const popupMenu = document.createElement('div');
+                        popupMenu.className = 'popup-menu';
+                        popupMenu.innerHTML = `
+                            <div onclick="editShortcut(${shortcuts.length}, '${name}', '${url}')">تعديل</div>
+                            <div onclick="deleteShortcut(${shortcuts.length})">حذف</div>
+                        `;
+                        shortcutDiv.appendChild(popupMenu);
+
+                        shortcutDiv.appendChild(icon);
+                        shortcutDiv.appendChild(text);
+                        shortcutDiv.appendChild(ellipsis);
+                        shortcutsContainer.appendChild(shortcutDiv);
+
+                        shortcuts.push({ name, url });
+
+                        // تحديث Local Storage بعد إضافة الاختصار
+                        localStorage.setItem('shortcuts', JSON.stringify(shortcuts));
+
+                        toggleForm(); // إخفاء النموذج بعد إضافة الاختصار
+                        document.getElementById('shortcutName').value = '';
+                        document.getElementById('shortcutURL').value = '';
+                    } else {
+                        alert('يرجى ملء جميع الحقول.');
+                    }
+                }
+
+                function togglePopupMenu(shortcutDiv) {
+                    const popupMenu = shortcutDiv.querySelector('.popup-menu');
+                    popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
+
+                    document.addEventListener('click', function () {
+                        popupMenu.style.display = 'none';
+                    }, { once: true });
+                }
+
+                function deleteShortcut(index) {
+                    shortcuts.splice(index, 1);
+
+                    // تحديث Local Storage بعد الحذف
+                    localStorage.setItem('shortcuts', JSON.stringify(shortcuts));
+
+                    renderShortcuts();
+                }
+
+                function editShortcut(index, name, url) {
+                    currentEditIndex = index;
+                    const editForm = document.getElementById('editForm');
+
+                    document.getElementById('editName').value = name;
+                    document.getElementById('editURL').value = url;
+
+                    editForm.style.display = 'block';
+                }
+
+                function saveEdit() {
+                    const newName = document.getElementById('editName').value;
+                    const newURL = document.getElementById('editURL').value;
+
+                    if (currentEditIndex !== null && newName && newURL) {
+                        shortcuts[currentEditIndex].name = newName;
+                        shortcuts[currentEditIndex].url = newURL;
+
+                        // تحديث Local Storage بعد التعديل
+                        localStorage.setItem('shortcuts', JSON.stringify(shortcuts));
+
+                        renderShortcuts();
+                        document.getElementById('editForm').style.display = 'none';
+                        currentEditIndex = null;
+                    } else {
+                        alert('يرجى ملء جميع الحقول.');
+                    }
+                }
+
+                function cancelEdit() {
+                    document.getElementById('editForm').style.display = 'none';
+                    currentEditIndex = null;
+                }
+
+                function renderShortcuts() {
+                    const shortcutList = document.getElementById("shortcuts");
+                    shortcutList.innerHTML = "";
+
+                    shortcuts.forEach((shortcut, index) => {
+                        const shortcutDiv = document.createElement('div');
+                        shortcutDiv.classList.add('shortcut');
+
+                        const icon = document.createElement('img');
+                        icon.src = `https://www.google.com/s2/favicons?sz=64&domain_url=${shortcut.url}`;
+                        icon.onclick = function () {
+                            window.open(shortcut.url, '_blank');
+                        };
+
+                        const text = document.createElement('div');
+                        text.classList.add('text');
+                        text.textContent = shortcut.name;
+
+                        const ellipsis = document.createElement('div');
+                        ellipsis.className = 'three-dots';
+                        ellipsis.innerHTML = '<i class="fas fa-ellipsis-v"></i>';
+                        ellipsis.style.position = 'absolute';
+                        ellipsis.style.top = '10px';
+                        ellipsis.style.right = '10px';
+                        ellipsis.onclick = function (event) {
+                            event.stopPropagation();
+                            togglePopupMenu(shortcutDiv);
+                        };
+
+                        const popupMenu = document.createElement('div');
+                        popupMenu.className = 'popup-menu';
+                        popupMenu.innerHTML = `
+                            <div onclick="editShortcut(${index}, '${shortcut.name}', '${shortcut.url}')">تعديل</div>
+                            <div onclick="deleteShortcut(${index})">حذف</div>
+                        `;
+                        shortcutDiv.appendChild(popupMenu);
+
+                        shortcutDiv.appendChild(icon);
+                        shortcutDiv.appendChild(text);
+                        shortcutDiv.appendChild(ellipsis);
+                        shortcutList.appendChild(shortcutDiv);
+                    });
+                }
+            </script>
+            <style>
+                .text {
+                    flex-grow: 1;
+                }
+
+                /* النقاط الثلاث مخفية افتراضيًا */
+                .three-dots {
+                    display: none;
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    cursor: pointer;
+                }
+
+                /* عند تمرير الفأرة على العنصر .shortcut، تظهر النقاط الثلاث */
+                .shortcut:hover .three-dots {
+                    display: block;
+                }
+
+                .popup-menu {
+                    display: none;
+                    position: absolute;
+                    top: 30px;
+                    right: 10px;
+                    background-color: #fff;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    padding: 10px;
+                    z-index: 1;
+                }
+
+                /* لإخفاء الاختصارات الإضافية بشكل افتراضي */
+                .hidden {
+                    display: none;
+                }
+
+                /* لتخصيص زر عرض المزيد/أقل */
+                .show-more-button {
+                    margin: 10px 0 20px 0;
+                    padding: 10px;
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    text-align: center;
+                }
+
+                .show-more-button:hover {
+                    background-color: #0056b3;
+                }
+            </style>
+
+            <div id="shortcuts"></div>
+            <button id="showMoreButton" class="show-more-button hidden" onclick="toggleShowMore()">عرض المزيد</button>
+
+            <script>
+                let showMore = false; // حالة زر "عرض المزيد"
+                const limit = 12; // الحد الأقصى للعرض الافتراضي
+
+                // دالة لتبديل العرض بين "عرض المزيد" و "عرض أقل"
+                function toggleShowMore() {
+                    showMore = !showMore;
+                    renderShortcuts();
+
+                    const showMoreButton = document.getElementById('showMoreButton');
+                    showMoreButton.textContent = showMore ? 'عرض أقل' : 'عرض المزيد';
+                }
+                function togglePopupMenu(shortcutDiv) {
+                    const popupMenu = shortcutDiv.querySelector('.popup-menu');
+
+                    // إذا كانت القائمة مخفية، عرضها وإضافة مستمع للنقر خارجها
+                    if (popupMenu.style.display === 'none' || popupMenu.style.display === '') {
+                        // إغلاق أي قائمة منبثقة مفتوحة أخرى
+                        document.querySelectorAll('.popup-menu').forEach(menu => menu.style.display = 'none');
+
+                        // عرض القائمة المنبثقة
+                        popupMenu.style.display = 'block';
+
+                        // مستمع للنقر خارج القائمة لإخفائها
+                        document.addEventListener('click', function closeMenu(event) {
+                            // إذا كان النقر خارج القائمة أو النقاط الثلاث
+                            if (!shortcutDiv.contains(event.target)) {
+                                popupMenu.style.display = 'none';
+                                document.removeEventListener('click', closeMenu); // إزالة المستمع بعد إخفاء القائمة
+                            }
+                        });
+                    } else {
+                        popupMenu.style.display = 'none'; // إخفاء القائمة إذا كانت معروضة
+                    }
+                }
+
+                // دالة لإعادة عرض الاختصارات مع الاهتمام بعدد العناصر المعروضة
+                function renderShortcuts() {
+                    const shortcutList = document.getElementById('shortcuts');
+                    shortcutList.innerHTML = '';
+
+                    shortcuts.forEach((shortcut, index) => {
+                        const shortcutDiv = document.createElement('div');
+                        shortcutDiv.classList.add('shortcut');
+
+                        const icon = document.createElement('img');
+                        icon.src = `https://www.google.com/s2/favicons?sz=64&domain_url=${shortcut.url}`;
+                        icon.onclick = function () {
+                            window.open(shortcut.url, '_blank');
+                        };
+
+                        const text = document.createElement('div');
+                        text.classList.add('text');
+                        text.textContent = shortcut.name;
+
+                        const ellipsis = document.createElement('div');
+                        ellipsis.className = 'three-dots';
+                        ellipsis.innerHTML = '<i class="fas fa-ellipsis-v"></i>';
+                        ellipsis.onclick = function (event) {
+                            event.stopPropagation();
+                            togglePopupMenu(shortcutDiv);
+                        };
+
+                        const popupMenu = document.createElement('div');
+                        popupMenu.className = 'popup-menu';
+                        popupMenu.innerHTML = `
+                            <div onclick="editShortcut(${index}, '${shortcut.name}', '${shortcut.url}')">تعديل</div>
+                            <div onclick="deleteShortcut(${index})">حذف</div>
+                        `;
+
+                        shortcutDiv.appendChild(icon);
+                        shortcutDiv.appendChild(text);
+                        shortcutDiv.appendChild(ellipsis);
+                        shortcutDiv.appendChild(popupMenu);
+
+                        // إذا كنا في وضع "عرض المزيد"، لا نخفي العناصر الإضافية
+                        if (index >= limit && !showMore) {
+                            shortcutDiv.classList.add('hidden');
+                        } else {
+                            shortcutDiv.classList.remove('hidden');
+                        }
+
+                        shortcutList.appendChild(shortcutDiv);
+                    });
+
+                    // إظهار أو إخفاء زر "عرض المزيد" حسب عدد الاختصارات
+                    const showMoreButton = document.getElementById('showMoreButton');
+                    if (shortcuts.length > limit) {
+                        showMoreButton.classList.remove('hidden');
+                    } else {
+                        showMoreButton.classList.add('hidden');
+                    }
+                }
+
+                function togglePopupMenu(shortcutDiv) {
+                    const popupMenu = shortcutDiv.querySelector('.popup-menu');
+                    popupMenu.style.display = popupMenu.style.display === 'block' ? 'none' : 'block';
+                }
+
+                // استدعاء renderShortcuts عند تحميل الصفحة
+                window.onload = renderShortcuts;
+            </script>
+            <script>
+
+                function renderShortcuts() {
+                    const shortcutList = document.getElementById('shortcuts');
+                    shortcutList.innerHTML = '';
+
+                    shortcuts.forEach((shortcut, index) => {
+                        const shortcutDiv = document.createElement('div');
+                        shortcutDiv.classList.add('shortcut');
+
+                        const icon = document.createElement('img');
+                        icon.src = `https://www.google.com/s2/favicons?sz=64&domain_url=${shortcut.url}`;
+                        icon.onclick = function () {
+                            window.open(shortcut.url, '_blank');
+                        };
+
+                        const text = document.createElement('div');
+                        text.classList.add('text');
+                        text.textContent = shortcut.name;
+
+                        const ellipsis = document.createElement('div');
+                        ellipsis.className = 'three-dots';
+                        ellipsis.innerHTML = '<i class="fas fa-ellipsis-v"></i>';
+                        ellipsis.onclick = function (event) {
+                            event.stopPropagation();
+                            togglePopupMenu(shortcutDiv);
+                        };
+
+                        const popupMenu = document.createElement('div');
+                        popupMenu.className = 'popup-menu';
+                        popupMenu.innerHTML = `
+            <div onclick="editShortcut(${index}, '${shortcut.name}', '${shortcut.url}')">تعديل</div>
+            <div onclick="deleteShortcut(${index})">حذف</div>
+        `;
+
+                        shortcutDiv.appendChild(icon);
+                        shortcutDiv.appendChild(text);
+                        shortcutDiv.appendChild(ellipsis);
+                        shortcutDiv.appendChild(popupMenu);
+
+                        // إظهار أو إخفاء الاختصارات حسب حالة "عرض المزيد"
+                        if (index >= limit && !showMore) {
+                            shortcutDiv.classList.add('hidden');
+                        } else {
+                            shortcutDiv.classList.remove('hidden');
+                        }
+
+                        shortcutList.appendChild(shortcutDiv);
+                    });
+
+                    // إظهار زر "عرض المزيد" إذا كان هناك اختصارات إضافية
+                    const showMoreButton = document.getElementById('showMoreButton');
+                    showMoreButton.classList.toggle('hidden', shortcuts.length <= limit);
+                }
+
+                // دالة لتبديل العرض بين "عرض المزيد" و "عرض أقل"
+                function toggleShowMore() {
+                    showMore = !showMore;
+                    renderShortcuts();
+
+                    const showMoreButton = document.getElementById('showMoreButton');
+                    showMoreButton.textContent = showMore ? 'عرض أقل' : 'عرض المزيد';
+                }
+
+                // استدعاء renderShortcuts عند تحميل الصفحة
+                window.onload = renderShortcuts;
+
+            </script>
+
+        </body>
+
+</html>
